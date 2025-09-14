@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Skill Enhancement Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome, {{ data.name }}</h1>
+    </header>
+
+    <div class="dashboard-grid">
+
+        <!-- User Profile Card -->
+        <div class="card profile">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Image"/>
+            <h2>{{ data.name }}</h2>
+            <p><strong>Email:</strong> {{ data.email }}</p>
+            <p><strong>LinkedIn:</strong> linkedin.com/in/anika-ahmed</p>
+            <p><strong>College:</strong> Delhi University</p>
+        </div>
+
+        <!-- Completion Chart -->
+        <div class="card completion-chart">
+    <h3>Overall Performance</h3>
+    <small>Course completion rate</small>
+
+    <div class="chart-wrapper">
+        <canvas id="completionChart" width="150" height="150"></canvas>
+        <div class="chart-label">
+            <h2>80%</h2>
+            <p>PRO LEARNER</p>
+        </div>
+    </div>
+</div>
+
+        <!-- Stats Summary -->
+        <div class="card stats">
+            <h3>Stats Summary</h3>
+            📚 Enrolled Courses: <strong>5</strong><br/>
+            ✅ Projects Submitted: <strong>3</strong><br/>
+            📝 Tests Passed: <strong>6</strong><br/>
+            ⏱ Hours Spent: <strong>90h</strong>
+        </div>
+
+        <!-- Consistency Tracker -->
+        <div class="card consistency">
+            <h3>🔥 Consistency</h3>
+            <div class="consistency-calendar">
+                <div class="day active">M</div>
+                <div class="day active">T</div>
+                <div class="day active">W</div>
+                <div class="day inactive">T</div>
+                <div class="day active">F</div>
+                <div class="day inactive">S</div>
+                <div class="day active">S</div>
+            </div>
+            <p><strong>Streak:</strong> 5 Days</p>
+        </div>
+
+        <!-- Achievements -->
+        <div class="card achievements">
+            <h3>🎖 Achievements</h3>
+            <span class="badge">First Skill Completed</span>
+            <span class="badge">Consistent Learner</span>
+            <span class="badge">100 Hours Spent</span>
+        </div>
+
+        <!-- Projects Submitted -->
+        <div class="card projects">
+            <h3>🛠 Projects Submitted</h3>
+            <p>✔ Portfolio Website – Submitted</p>
+            <p>✔ Data Analysis Project – Submitted</p>
+            <p>⌛ Machine Learning App – In Progress</p>
+        </div>
+
+        <!-- Skills Mastery Section -->
+        <div class="card skills">
+            <h3>💡 Skill Mastery</h3>
+
+            <div class="skill-item">
+               {% if data.skills %}
+      <ul>
+        {% for skill in data.skills %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+      </ul>
+     
+      {% endif %}
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 90%;"></div>
+                </div>
+                <small>90%</small>
+            </div>
+
+            <div class="skill-item">
+                <label>JavaScript</label>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%;"></div>
+                </div>
+                <small>75%</small>
+            </div>
+
+            <div class="skill-item">
+                <label>Python</label>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%;"></div>
+                </div>
+                <small>80%</small>
+            </div>
+
+            <div class="skill-item">
+                <label>Machine Learning</label>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 60%;"></div>
+                </div>
+                <small>60%</small>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 Skill Enhancement System</p>
+    </footer>
+
+   <script>
+    const ctx = document.getElementById('completionChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'Remaining'],
+            datasets: [{
+                data: [80, 20],
+                backgroundColor: ['#28a745', '#e9ecef'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            cutout: '80%',
+            plugins: { legend: { display: false } }
+        }
+    });
+</script>
+
+</body>
+
+</html>
